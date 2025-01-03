@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send("This server belongs to Divya");
-});
+const connectToMongo =  require('./mongodb');
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+connectToMongo();
+app.use(express.json());
+app.use('/form',require('./routes/form'))
+
+app.listen(3000, () => {
+    console.log(`Server is running at http://localhost:3000`);
 });
